@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "919820138387",
+    "project_id": "jolly-broadband",
+    "storage_bucket": "jolly-broadband.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919820138387:android:85450372c2aaa8fee3da66",
+        "android_client_info": {
+          "package_name": "com.cnergee.jollybroadband"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919820138387-8rve1fvl5jcd4g2turocoeoevd74ajjk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBypMq7WofcpPLt-Tj3fc6GQtRBNg3rbi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919820138387-8rve1fvl5jcd4g2turocoeoevd74ajjk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
