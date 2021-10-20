@@ -190,7 +190,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener, I
 			share.putExtra(Intent.EXTRA_TEXT, getResources().getString( R.string.playstore_link ));
 			Uri imageUri = Uri.parse("android.resource://" + getResources().getString( R.string.playstore_link ));
 			share.putExtra(Intent.EXTRA_STREAM, imageUri);
-			startActivity(Intent.createChooser(share, "ArrowSwift App"));
+			startActivity(Intent.createChooser(share, "Jolly Broadband"));
 			Utils.resideMenu.closeMenu();
 		}
 
@@ -312,7 +312,7 @@ public class BaseActivity extends FragmentActivity implements OnClickListener, I
 			share.putExtra(Intent.EXTRA_TEXT, getResources().getString( R.string.playstore_link ));
 			Uri imageUri = Uri.parse("android.resource://" + getResources().getString( R.string.playstore_link ));
 			share.putExtra(Intent.EXTRA_STREAM, imageUri);
-			startActivity(Intent.createChooser(share, "ArrowSwift  App"));
+			startActivity(Intent.createChooser(share, "Jolly Broadband"));
 			Utils.resideMenu.closeMenu();
 			
 		}

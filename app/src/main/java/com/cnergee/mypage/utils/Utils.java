@@ -340,6 +340,8 @@ public class Utils extends Activity {
 		itemAlerts.setOnClickListener(clk);
 		itemHelp.setOnClickListener(clk);
 		itemCall_to_CC.setOnClickListener(clk);
+		itemCall_to_CC.setVisibility(View.GONE);
+
 		if(sharedPreferences1.getBoolean("is_24ol", true)){
 
 		}

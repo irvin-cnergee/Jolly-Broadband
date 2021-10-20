@@ -1091,7 +1091,7 @@ public class MakePayment_PayUMoneyActivity extends BaseActivity implements Dialo
 
                             }else{
                                 MakePayment_PayUMoneyActivity.this.finish();
-                                Intent i = new Intent(MakePayment_PayUMoneyActivity.this,WebView_AtomPayments.class);
+                                Intent i = new Intent(MakePayment_PayUMoneyActivity.this,WebView_PayUMoneyActivity.class);
                                 i.putExtra("returnUrl",atom_url);
                                 i.putExtra("trackId",atom_track_id);
                                 i.putExtra("Error",atom_error);

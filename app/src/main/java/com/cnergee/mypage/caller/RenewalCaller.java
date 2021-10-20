@@ -6,6 +6,7 @@ import com.cnergee.mypage.SOAP.RenewalSOAP;
 import com.cnergee.mypage.WebView_AtomPayments;
 import com.cnergee.mypage.WebView_CCAvenueActivity;
 import com.cnergee.mypage.WebView_PayTmActivity;
+import com.cnergee.mypage.WebView_PayUMoneyActivity;
 import com.cnergee.mypage.obj.PaymentsObj;
 import com.cnergee.mypage.utils.Utils;
 
@@ -70,6 +71,11 @@ public class RenewalCaller extends Thread{
             if(Utils.is_atom){
                 WebView_AtomPayments.rslt = renewalsoap.CallComplaintNoSOAP();
                 WebView_AtomPayments.responseMsg = renewalsoap.getServerMessage();
+            }
+            else
+            if(Utils.is_payU){
+                WebView_PayUMoneyActivity.rslt = renewalsoap.CallComplaintNoSOAP();
+                WebView_PayUMoneyActivity.responseMsg = renewalsoap.getServerMessage();
             }
 		}catch (SocketException e) {
 			e.printStackTrace();

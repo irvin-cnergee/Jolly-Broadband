@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Jolly Broadband </string>
+    <string name="app_name"> Jolly Broadband</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="btn_renew">Renewal</string>
@@ -47,7 +47,7 @@
     <string name="plan_price">Discounted Price (\u20B9)</string>
     <string name="package_plan_price">My Price (\u20B9)</string>
     <string name="only_rupees_sign"> My Price [\u20B9]</string>
-    <!--    &lt;a href="http://www.google.com"&gt; &lt;/a&gt;  -->
+<!--    &lt;a href="http://www.google.com"&gt; &lt;/a&gt;  -->
     <string name="termsandcondition">I have read and accepted the &lt;a href="http://www.google.com"&gt; Terms and Conditions.&lt;/a&gt;
                     We as a merchant shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any Transaction, 
                     on Account of the Cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time.</string>
@@ -72,31 +72,31 @@
     <string name="click_here"><u>Click Here For Details</u></string>
     <string name="cheque_bounce_message">You are not allowed to renew from App \n Please renew from nearest branch office.</string>
     <string name="update_msg">Dear Subscriber, Please Update to the New Version of \'Jolly Broadband  App\'. \nVisit Play Store!</string>
-    <string name="compulsory_update_msg">New Version of App \'Jolly Broadband  App\' is now Available. \nPlease Visit Play Store to Update!</string>
+    <string name="compulsory_update_msg">New Version of App \'Jolly Broadband App\' is now Available. \nPlease Visit Play Store to Update!</string>
     <string name="exist_mac">
 <![CDATA[
  Existing\n
 Machine
   ]]>
     </string>
-
-    <string name="new_mac">
+    
+     <string name="new_mac">
     <![CDATA[
  New\n
 Machine
   ]]>        
 </string>
 
-    <string name="rate_app_text"><![CDATA[If you enjoy using Jolly Broadband  App, please take a mom ent to rate the app. \nThank you for your support!]]></string>
+     <string name="rate_app_text"><![CDATA[If you enjoy using Jolly Broadband  App, please take a mom ent to rate the app. \nThank you for your support!]]></string>
 
     <string name="go_back"><u>Go Back</u></string>
     <string name="package_price">package Price</string>
-    <string name="playstore_link">https://play.google.com/store/apps/details?id=com.cnergee.myapp.jollybroadband&amp;hl=en</string>
+    <string name="playstore_link">https://play.google.com/store/apps/details?id=com.cnergee.Jolly Broadband&amp;hl=en</string>
     <string name="app_please_wait">Payment Processing Please Wait.</string>
 
     <string name="rs">\u20B9</string>
     <string name="phone_renew">"As your last payment was phone renewal.You are Not Allowed to Renew package from Here."</string>
     <string name="payment_failure_message">Transaction has been cancelled</string>
-    <string name="hostname">Jolly Broadband</string>
+    <string name="hostname">EBS</string>
 
 </resources>

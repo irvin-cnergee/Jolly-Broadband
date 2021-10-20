@@ -9,6 +9,7 @@
     <dimen name="popup_width">120dp</dimen>
     <dimen name="profile_text">14sp</dimen>
     <dimen name="pay_now_new">22sp</dimen>
+    <dimen name="dimen_50dp">50dp</dimen>
 
     <dimen name="home_iv_padding_top">6dp</dimen>
     <dimen name="home_iv_padding_bottom">6dp</dimen>
@@ -32,6 +33,5 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="dimen_50dp">50dp</dimen>
 
 </resources>

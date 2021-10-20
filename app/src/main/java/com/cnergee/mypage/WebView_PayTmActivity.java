@@ -318,10 +318,10 @@ public class WebView_PayTmActivity extends BaseActivity {
         protected void onPreExecute() {
 
             Utils.log("Started", " InsertAfterPayment");
-            mProgressHUD = ProgressHUD
-                    .show(WebView_PayTmActivity.this,
-                            getString(R.string.app_please_wait_label), true,
-                            false, this);
+//            mProgressHUD = ProgressHUD
+//                    .show(WebView_PayTmActivity.this,
+//                            getString(R.string.app_please_wait_label), true,
+//                            false, this);
         }
 
         @Override

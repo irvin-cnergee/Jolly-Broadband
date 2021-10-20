@@ -292,6 +292,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight=".75"
+                        android:visibility="invisible"
                         android:background="@drawable/nav_bg"
                         android:gravity="center"
                         android:padding="5dp" >

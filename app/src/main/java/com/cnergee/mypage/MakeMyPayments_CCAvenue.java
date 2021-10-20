@@ -199,7 +199,7 @@ public class MakeMyPayments_CCAvenue extends BaseActivity implements OnCancelLis
 		ClassName = bundle.getString("ClassName");
 		additionalAmount = (AdditionalAmount) bundle.getSerializable("addtional_amount");
 		PackageId = bundle.getString("PackageId");
-
+        changeTheContentView();
 		Utils.log("UpdateFrom", "is:" + UpdateFrom);
 		trackid_check=false;
 		is_member_details=false;

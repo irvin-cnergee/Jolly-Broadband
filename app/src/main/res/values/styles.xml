@@ -53,15 +53,15 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="progressColor">@color/color_red</item>
         <item name="hasShadow">true</item>
+        <item name="strokeWidth1">10dp</item>
         <item name="titleColor">@color/color_red</item>
         <item name="subtitleColor">@color/color_red</item>
-<!--        <item name="strokeWidth">10dp</item>-->
 
     </style>
 
     <style name="Widget.ProgressBar.Holo.CircularProgressBar" parent="Widget.ProgressBar.CircularProgressBar">
         <item name="hasShadow">true</item>
-<!--        <item name="strokeWidth">@dimen/dimen_25dp</item>-->
+        <item name="strokeWidth1">25dp</item>
     </style>
 
     <style name="ProgressHUD" parent="@android:style/Theme.Dialog">

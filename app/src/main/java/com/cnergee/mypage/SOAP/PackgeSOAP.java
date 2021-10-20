@@ -9,6 +9,8 @@
 
 package com.cnergee.mypage.SOAP;
 
+import android.util.Log;
+
 import com.cnergee.mypage.obj.AuthenticationMobile;
 import com.cnergee.mypage.obj.PackageList;
 import com.cnergee.mypage.utils.Utils;
@@ -120,7 +122,11 @@ public class PackgeSOAP<E> {
 		}*/
 		try {
 			//Log.i("#####################", " CALL ");
-			androidHttpTransport.call(WSDL_TARGET_NAMESPACE + METHOD_NAME,
+            String str = WSDL_TARGET_NAMESPACE + METHOD_NAME;
+
+            Log.e("data", " DONE"+str);
+
+            androidHttpTransport.call(WSDL_TARGET_NAMESPACE + METHOD_NAME,
 					envelope);
 			Utils.log(this.getClass().getSimpleName()+" Request:",""+androidHttpTransport.requestDump);
 			Utils.log(this.getClass().getSimpleName()+" Response:",""+androidHttpTransport.responseDump);

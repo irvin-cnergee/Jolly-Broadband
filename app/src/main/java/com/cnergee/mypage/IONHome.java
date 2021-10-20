@@ -1360,7 +1360,7 @@ public class IONHome extends Activity implements OnClickListener {
 			Display d = w.getDefaultDisplay();
 			width = d.getWidth();
 			height = d.getHeight();
-			;
+
 		}
 
 		TextView tvTitle = (TextView) dialog.findViewById(R.id.tvTitle);
@@ -1478,7 +1478,10 @@ public class IONHome extends Activity implements OnClickListener {
 		itemlogout.setOnClickListener(clk);
 		itemlogout1.setOnClickListener(clk);
 
-		itemProfile.setOnClickListener(clk);
+		itemCall_to_CC.setVisibility(View.GONE);
+        itemCall_to_CC1.setVisibility(View.GONE);
+
+        itemProfile.setOnClickListener(clk);
 		itemRenewal.setOnClickListener(clk);
 		//itemChat.setOnClickListener(clk);
 		itemShare.setOnClickListener(clk);

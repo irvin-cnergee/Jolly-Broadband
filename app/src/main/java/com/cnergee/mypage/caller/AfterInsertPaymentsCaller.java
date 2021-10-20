@@ -8,6 +8,7 @@ import com.cnergee.mypage.WebView_AtomPayments;
 import com.cnergee.mypage.WebView_CCAvenueActivity;
 import com.cnergee.mypage.WebView_CCAvenue_TopUpActivity;
 import com.cnergee.mypage.WebView_PayTmActivity;
+import com.cnergee.mypage.WebView_PayUMoneyActivity;
 import com.cnergee.mypage.obj.PaymentsObj;
 import com.cnergee.mypage.utils.Utils;
 
@@ -79,6 +80,11 @@ public class AfterInsertPaymentsCaller extends Thread{
                     WebView_AtomPayments.rslt = afterpaymentsoap.CallComplaintNoSOAP();
                     WebView_AtomPayments.responseMsg = afterpaymentsoap.getServerMessage();
                 }
+                else
+                if(Utils.is_payU){
+                    WebView_PayUMoneyActivity.rslt = afterpaymentsoap.CallComplaintNoSOAP();
+                    WebView_PayUMoneyActivity.responseMsg = afterpaymentsoap.getServerMessage();
+                }
 			}
 			else{
 				if(Utils.is_CCAvenue){
@@ -94,6 +100,11 @@ public class AfterInsertPaymentsCaller extends Thread{
                 if(Utils.is_atom){
                     WebView_AtomPayments.rslt = afterpaymentsoap.CallComplaintNoSOAP();
                     WebView_AtomPayments.responseMsg = afterpaymentsoap.getServerMessage();
+                }
+                else
+                if(Utils.is_payU){
+                    WebView_PayUMoneyActivity.rslt = afterpaymentsoap.CallComplaintNoSOAP();
+                    WebView_PayUMoneyActivity.responseMsg = afterpaymentsoap.getServerMessage();
                 }
 			}
 			

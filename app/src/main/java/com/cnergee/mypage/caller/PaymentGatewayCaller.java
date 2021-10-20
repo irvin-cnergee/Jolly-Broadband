@@ -98,6 +98,8 @@ public class PaymentGatewayCaller extends Thread {
                 {
                     MakeMyPayment_PayU.rslt = adjustmentSOAP.CallAdjustmentAmountSOAP(BankName);
                     MakeMyPayment_PayU.adjTrackval = adjustmentSOAP.getServerMessage();
+
+
                     Utils.log("Payment gateway  >>>>getServerMessage<<<<<", adjustmentSOAP.getServerMessage());
 
                 }

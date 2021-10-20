@@ -423,58 +423,290 @@ public class MainActivity extends Activity {
 		splashThread.start();*/
 	}
 
-	private void checkPermissions() {
-//		boolean permissionsGranted = checkPermission(PERMISSIONS_REQUIRED);
-
-        if (permissionsGranted) {
-			Thread splashThread = new Thread() {
-				@Override
-				public void run() {
-					try {
-						int waited = 0;
-						while (waited < 2000) {
-							sleep(100);
-							waited += 100;
-						}
-					} catch (InterruptedException e) {
-						// do nothing
-					} finally {
-						finish();
-						if (utils.getMemberLoginID().equals("")	|| utils.getMemberId().equals("")||
-								utils.getMobileNoPrimary().equals("")) {
-
-							//Intent intent = new Intent(MainActivity.this, Login.class);
-							Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
-							intent.putExtra("from", "1");
-							startActivity(intent);
-							overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-							MainActivity.this.finish();
-						}
-						else
-						{
-							MainActivity.this.finish();
-							//System.out.println(utils.getMemberId());
-							Intent intent = new Intent(MainActivity.this, IONHome.class);
-							//startActivityForResult(intent, 0);
-							startActivity(intent);
-							overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-						}
-					}
-				}
-			};
-			splashThread.start();
-
-		} else {
-			boolean showRationale = false;
-
-//			for (String permission: PERMISSIONS_REQUIRED) {
-//				showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
-//				if (!showRationale) {
-//					break;
+//	private void checkPermissions() {
+////		boolean permissionsGranted = checkPermission(PERMISSIONS_REQUIRED);
+//
+//        if (permissionsGranted) {
+//			Thread splashThread = new Thread() {
+//				@Override
+//				public void run() {
+//					try {
+//						int waited = 0;
+//						while (waited < 2000) {
+//							sleep(100);
+//							waited += 100;
+//						}
+//					} catch (InterruptedException e) {
+//						// do nothing
+//					} finally {
+//						finish();
+//						if (utils.getMemberLoginID().equals("")	|| utils.getMemberId().equals("")||
+//								utils.getMobileNoPrimary().equals("")) {
+//
+//							//Intent intent = new Intent(MainActivity.this, Login.class);
+//							Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
+//							intent.putExtra("from", "1");
+//							startActivity(intent);
+//							overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//							MainActivity.this.finish();
+//						}
+//						else
+//						{
+//							MainActivity.this.finish();
+//							//System.out.println(utils.getMemberId());
+//							Intent intent = new Intent(MainActivity.this, IONHome.class);
+//							//startActivityForResult(intent, 0);
+//							startActivity(intent);
+//							overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//						}
+//					}
 //				}
+//			};
+//			splashThread.start();
+//
+//		} else {
+//			boolean showRationale = false;
+//
+////			for (String permission: PERMISSIONS_REQUIRED) {
+////				showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+////				if (!showRationale) {
+////					break;
+////				}
+////			}
+//
+//			String dialogMsg = showRationale ? "We need some permissions to run this APP!" : "You've declined the required permissions, please grant them from your phone settings";
+//
+//			/*new AlertDialog.Builder(this)
+//					.setTitle("Permissions Required")
+//					.setMessage(dialogMsg)
+//					.setCancelable(false)
+//					.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int which) {
+//							//dialog.dismiss();
+//							ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS_REQUIRED, REQUEST_PERMISSIONS);
+//						}
+//					}).create().show();*/
+//
+//			showAlert(dialogMsg, MainActivity.this);
+//		}
+//	}
+//
+//	public void showAlert(String message, Context ctx){
+//		final Dialog dialog = new Dialog(ctx);
+//		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		//tell the Dialog to use the dialog.xml as it's layout description
+//		dialog.setContentView(R.layout.custom_dialog_box);
+//			/*Display display = ((Activity)ctx). getWindowManager().getDefaultDisplay();
+//			Point size = new Point();
+//			display.getSize(size);*/
+//		int width = 0;
+//		int height =0;
+//		dialog.setCancelable(false);
+//
+//		Point size = new Point();
+//		WindowManager w =((Activity)ctx).getWindowManager();
+//
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+//			w.getDefaultDisplay().getSize(size);
+//			width = size.x;
+//			height = size.y;
+//		} else {
+//			Display d = w.getDefaultDisplay();
+//			width = d.getWidth();
+//			height   = d.getHeight();;
+//		}
+//
+//		TextView dtv = (TextView) dialog.findViewById(R.id.tv1);
+//
+//		TextView txt = (TextView) dialog.findViewById(R.id.tv);
+//
+//		txt.setText(Html.fromHtml(message));
+//
+//		Button dialogButton = (Button) dialog.findViewById(R.id.btnSubmit);
+//
+//
+//		dialogButton.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//
+//				dialog.dismiss();
+////                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.SEND_SMS
+////                        , Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSIONS);
+//                checkPermission();
+////				ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS_REQUIRED, REQUEST_PERMISSIONS);
 //			}
+//		});
+//		if(isRunning((Activity)ctx))
+//			dialog.show();
+//		//(width/2)+((width/2)/2)
+//		//dialog.getWindow().setLayout((width/2)+((width/2)/2), height/2);
+//		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//		dialog.getWindow().setLayout((width/2)+(width/2)/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+//	}
+//
+//
+//    protected void checkPermission(){
+//        if(ContextCompat.checkSelfPermission(mActivity,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                + ContextCompat.checkSelfPermission(
+//                mActivity,Manifest.permission.CALL_PHONE)
+//                + ContextCompat.checkSelfPermission(
+//                mActivity,Manifest.permission.READ_EXTERNAL_STORAGE)
+//                != PackageManager.PERMISSION_GRANTED){
+//
+//            // Do something, when permissions not granted
+//            if(ActivityCompat.shouldShowRequestPermissionRationale(
+//                    mActivity,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    || ActivityCompat.shouldShowRequestPermissionRationale(
+//                    mActivity,Manifest.permission.CALL_PHONE)
+//                    || ActivityCompat.shouldShowRequestPermissionRationale(
+//                    mActivity,Manifest.permission.READ_EXTERNAL_STORAGE)
+//
+//                    ){
+//                // If we should give explanation of requested permissions
+//
+//                // Show an alert dialog here with request explanation
+//                AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+//                builder.setMessage("Camera, Read Contacts and Write External" +
+//                        " Storage permissions are required to do the task.");
+//                builder.setTitle("Please grant those permissions");
+//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        ActivityCompat.requestPermissions(
+//                                mActivity,
+//                                new String[]{
+//                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                        Manifest.permission.CALL_PHONE,
+//                                        Manifest.permission.READ_EXTERNAL_STORAGE
+//                                },
+//                                REQUEST_PERMISSIONS
+//                        );
+//                    }
+//                });
+//                builder.setNeutralButton("Cancel",null);
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//            }else{
+//                // Directly request for required permissions, without explanation
+//                ActivityCompat.requestPermissions(
+//                        mActivity,
+//                        new String[]{
+//                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                Manifest.permission.CALL_PHONE,
+//                                Manifest.permission.READ_EXTERNAL_STORAGE
+//                        },
+//                        REQUEST_PERMISSIONS
+//                );
+//            }
+//        }else {
+//            // Do something, when permissions are already granted
+//
+//            permissionsGranted = true;
+//
+////            Thread splashThread = new Thread() {
+////                @Override
+////                public void run() {
+////                    try {
+////                        int waited = 0;
+////                        while (waited < 2000) {
+////                            sleep(100);
+////                            waited += 100;
+////                        }
+////                    } catch (InterruptedException e) {
+////                        // do nothing
+////                    } finally {
+////                        finish();
+//                        if (utils.getMemberLoginID().equals("") || utils.getMemberId().equals("") ||
+//                                utils.getMobileNoPrimary().equals("")) {
+//
+//                            //Intent intent = new Intent(MainActivity.this, Login.class);
+//                            Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
+//                            intent.putExtra("from", "1");
+//                            startActivity(intent);
+//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            MainActivity.this.finish();
+//                        } else {
+//                            MainActivity.this.finish();
+//                            //System.out.println(utils.getMemberId());
+//                            Intent intent = new Intent(MainActivity.this, IONHome.class);
+//                            //startActivityForResult(intent, 0);
+//                            startActivity(intent);
+//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                        }
+////                    }
+////                }
+////            };
+////            splashThread.start();
+////            Toast.makeText(mContext,"Permissions already granted",Toast.LENGTH_SHORT).show();
+//        }
+//    }
+//
+//
+//
+//
+//	public static boolean isRunning(Context ctx) {
+//		ActivityManager activityManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+//		List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+//
+//		for (ActivityManager.RunningTaskInfo task : tasks) {
+//			if (ctx.getPackageName().equalsIgnoreCase(task.baseActivity.getPackageName()))
+//				return true;
+//		}
+//
+//		return false;
+//	}
 
-			String dialogMsg = showRationale ? "We need some permissions to run this APP!" : "You've declined the required permissions, please grant them from your phone settings";
+    private void checkPermissions() {
+        boolean permissionsGranted = checkPermission(PERMISSIONS_REQUIRED);
+        if (permissionsGranted) {
+            Thread splashThread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        int waited = 0;
+                        while (waited < 2000) {
+                            sleep(100);
+                            waited += 100;
+                        }
+                    } catch (InterruptedException e) {
+                        // do nothing
+                    } finally {
+                        finish();
+                        if (utils.getMemberLoginID().equals("")	|| utils.getMemberId().equals("")||
+                                utils.getMobileNoPrimary().equals("")) {
+
+                            //Intent intent = new Intent(MainActivity.this, Login.class);
+                            Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
+                            intent.putExtra("from", "1");
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            MainActivity.this.finish();
+                        }
+                        else
+                        {
+                            MainActivity.this.finish();
+                            //System.out.println(utils.getMemberId());
+                            Intent intent = new Intent(MainActivity.this, IONHome.class);
+                            //startActivityForResult(intent, 0);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        }
+                    }
+                }
+            };
+            splashThread.start();
+
+        } else {
+            boolean showRationale = true;
+            for (String permission: PERMISSIONS_REQUIRED) {
+                showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+                if (!showRationale) {
+                    break;
+                }
+            }
+
+            String dialogMsg = showRationale ? "We need some permissions to run this APP!" : "You've declined the required permissions, please grant them from your phone settings";
 
 			/*new AlertDialog.Builder(this)
 					.setTitle("Permissions Required")
@@ -488,240 +720,98 @@ public class MainActivity extends Activity {
 						}
 					}).create().show();*/
 
-			showAlert(dialogMsg, MainActivity.this);
-		}
-	}
-
-	public void showAlert(String message, Context ctx){
-		final Dialog dialog = new Dialog(ctx);
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//tell the Dialog to use the dialog.xml as it's layout description
-		dialog.setContentView(R.layout.custom_dialog_box);
-			/*Display display = ((Activity)ctx). getWindowManager().getDefaultDisplay();
-			Point size = new Point();
-			display.getSize(size);*/
-		int width = 0;
-		int height =0;
-		dialog.setCancelable(false);
-
-		Point size = new Point();
-		WindowManager w =((Activity)ctx).getWindowManager();
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-			w.getDefaultDisplay().getSize(size);
-			width = size.x;
-			height = size.y;
-		} else {
-			Display d = w.getDefaultDisplay();
-			width = d.getWidth();
-			height   = d.getHeight();;
-		}
-
-		TextView dtv = (TextView) dialog.findViewById(R.id.tv1);
-
-		TextView txt = (TextView) dialog.findViewById(R.id.tv);
-
-		txt.setText(Html.fromHtml(message));
-
-		Button dialogButton = (Button) dialog.findViewById(R.id.btnSubmit);
-
-
-		dialogButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				dialog.dismiss();
-//                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.SEND_SMS
-//                        , Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSIONS);
-                checkPermission();
-//				ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS_REQUIRED, REQUEST_PERMISSIONS);
-			}
-		});
-		if(isRunning((Activity)ctx))
-			dialog.show();
-		//(width/2)+((width/2)/2)
-		//dialog.getWindow().setLayout((width/2)+((width/2)/2), height/2);
-		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		dialog.getWindow().setLayout((width/2)+(width/2)/2, LinearLayout.LayoutParams.WRAP_CONTENT);
-	}
-
-
-    protected void checkPermission(){
-        if(ContextCompat.checkSelfPermission(mActivity,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                + ContextCompat.checkSelfPermission(
-                mActivity,Manifest.permission.CALL_PHONE)
-                + ContextCompat.checkSelfPermission(
-                mActivity,Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-
-            // Do something, when permissions not granted
-            if(ActivityCompat.shouldShowRequestPermissionRationale(
-                    mActivity,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    || ActivityCompat.shouldShowRequestPermissionRationale(
-                    mActivity,Manifest.permission.CALL_PHONE)
-                    || ActivityCompat.shouldShowRequestPermissionRationale(
-                    mActivity,Manifest.permission.READ_EXTERNAL_STORAGE)
-
-                    ){
-                // If we should give explanation of requested permissions
-
-                // Show an alert dialog here with request explanation
-                AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-                builder.setMessage("Camera, Read Contacts and Write External" +
-                        " Storage permissions are required to do the task.");
-                builder.setTitle("Please grant those permissions");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.requestPermissions(
-                                mActivity,
-                                new String[]{
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                        Manifest.permission.CALL_PHONE,
-                                        Manifest.permission.READ_EXTERNAL_STORAGE
-                                },
-                                REQUEST_PERMISSIONS
-                        );
-                    }
-                });
-                builder.setNeutralButton("Cancel",null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }else{
-                // Directly request for required permissions, without explanation
-                ActivityCompat.requestPermissions(
-                        mActivity,
-                        new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.CALL_PHONE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE
-                        },
-                        REQUEST_PERMISSIONS
-                );
-            }
-        }else {
-            // Do something, when permissions are already granted
-
-            permissionsGranted = true;
-
-//            Thread splashThread = new Thread() {
-//                @Override
-//                public void run() {
-//                    try {
-//                        int waited = 0;
-//                        while (waited < 2000) {
-//                            sleep(100);
-//                            waited += 100;
-//                        }
-//                    } catch (InterruptedException e) {
-//                        // do nothing
-//                    } finally {
-//                        finish();
-                        if (utils.getMemberLoginID().equals("") || utils.getMemberId().equals("") ||
-                                utils.getMobileNoPrimary().equals("")) {
-
-                            //Intent intent = new Intent(MainActivity.this, Login.class);
-                            Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
-                            intent.putExtra("from", "1");
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            MainActivity.this.finish();
-                        } else {
-                            MainActivity.this.finish();
-                            //System.out.println(utils.getMemberId());
-                            Intent intent = new Intent(MainActivity.this, IONHome.class);
-                            //startActivityForResult(intent, 0);
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        }
-//                    }
-//                }
-//            };
-//            splashThread.start();
-//            Toast.makeText(mContext,"Permissions already granted",Toast.LENGTH_SHORT).show();
+            showAlert(dialogMsg, MainActivity.this);
         }
     }
 
+    public void showAlert(String message, Context ctx){
+        final Dialog dialog = new Dialog(ctx);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //tell the Dialog to use the dialog.xml as it's layout description
+        dialog.setContentView(R.layout.custom_dialog_box);
+			/*Display display = ((Activity)ctx). getWindowManager().getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);*/
+        int width = 0;
+        int height =0;
+        dialog.setCancelable(false);
+
+        Point size = new Point();
+        WindowManager w =((Activity)ctx).getWindowManager();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            w.getDefaultDisplay().getSize(size);
+            width = size.x;
+            height = size.y;
+        } else {
+            Display d = w.getDefaultDisplay();
+            width = d.getWidth();
+            height   = d.getHeight();;
+        }
+
+        TextView dtv = (TextView) dialog.findViewById(R.id.tv1);
+
+        TextView txt = (TextView) dialog.findViewById(R.id.tv);
+
+        txt.setText(Html.fromHtml(message));
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btnSubmit);
 
 
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-	public static boolean isRunning(Context ctx) {
-		ActivityManager activityManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-		List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+                dialog.dismiss();
+                ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS_REQUIRED, REQUEST_PERMISSIONS);
+            }
+        });
+        if(isRunning((Activity)ctx))
+            dialog.show();
+        //(width/2)+((width/2)/2)
+        //dialog.getWindow().setLayout((width/2)+((width/2)/2), height/2);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setLayout((width/2)+(width/2)/2, LinearLayout.LayoutParams.WRAP_CONTENT);
+    }
+    public static boolean isRunning(Context ctx) {
+        ActivityManager activityManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 
-		for (ActivityManager.RunningTaskInfo task : tasks) {
-			if (ctx.getPackageName().equalsIgnoreCase(task.baseActivity.getPackageName()))
-				return true;
-		}
+        for (ActivityManager.RunningTaskInfo task : tasks) {
+            if (ctx.getPackageName().equalsIgnoreCase(task.baseActivity.getPackageName()))
+                return true;
+        }
 
-		return false;
-	}
-
-
-	private boolean checkPermission(String permissions[]) {
-		for (String permission : permissions) {
-
-			if (ContextCompat.checkSelfPermission(getApplicationContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-				return false;
-			}
-
-		}
-		return true;
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-//                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.CAMERA)
-//                    == PackageManager.PERMISSION_GRANTED  && checkSelfPermission(Manifest.permission.CALL_PHONE)
-//                    == PackageManager.PERMISSION_GRANTED   && checkSelfPermission(Manifest.permission.SEND_SMS)
-//                    == PackageManager.PERMISSION_GRANTED   && checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-//                    == PackageManager.PERMISSION_GRANTED) {
-//                Log.v("TAG","Permission is granted");
-//
-//
-//                return true;
-//            } else {
-//
-//                Log.v("TAG","Permission is revoked");
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.SEND_SMS
-//                        , Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSIONS);
-//                return false;
-//            }
-//
-//        }
-//        else { //permission is automatically granted on sdk<23 upon installation
-//            Log.v("TAG","Permission is granted");
-//            return true;
-//        }
-	}
+        return false;
+    }
 
 
+    private boolean checkPermission(String permissions[]) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults){
-        switch (requestCode){
-            case REQUEST_PERMISSIONS:{
-                // When request is cancelled, the results array are empty
-                if(
-                        (grantResults.length >0) &&
-                                (grantResults[0]
-                                        + grantResults[1]
-                                        + grantResults[2]
-                                        == PackageManager.PERMISSION_GRANTED
-                                )
-                ){
-                    // Permissions are granted
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-                    boolean hasGrantedPermissions = true;
-			for (int i=0; i<grantResults.length; i++) {
-				if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-					hasGrantedPermissions = false;
-					break;
-				}
-			}
+        if (requestCode == REQUEST_PERMISSIONS) {
 
-			if (!hasGrantedPermissions) {
-				finish();
-			}else {
+            boolean hasGrantedPermissions = true;
+            for (int i=0; i<grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    hasGrantedPermissions = false;
+                    break;
+                }
+            }
+
+            if (!hasGrantedPermissions) {
+                finish();
+            }else {
                 Thread splashThread = new Thread() {
                     @Override
                     public void run() {
@@ -735,17 +825,18 @@ public class MainActivity extends Activity {
                             // do nothing
                         } finally {
                             finish();
-                            if (utils.getMemberLoginID().equals("") || utils.getMemberId().equals("") ||
+                            if (utils.getMemberLoginID().equals("")	|| utils.getMemberId().equals("")||
                                     utils.getMobileNoPrimary().equals("")) {
 
-                                 permissionsGranted = true;
                                 //Intent intent = new Intent(MainActivity.this, Login.class);
                                 Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
                                 intent.putExtra("from", "1");
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 MainActivity.this.finish();
-                            } else {
+                            }
+                            else
+                            {
                                 MainActivity.this.finish();
                                 //System.out.println(utils.getMemberId());
                                 Intent intent = new Intent(MainActivity.this, IONHome.class);
@@ -757,19 +848,127 @@ public class MainActivity extends Activity {
                     }
                 };
                 splashThread.start();
+
             }
-
-
-
-//                    Toast.makeText(mContext,"Permissions granted.",Toast.LENGTH_SHORT).show();
-                }else {
-                    // Permissions are denied
-                    Toast.makeText(mContext,"Permissions denied.",Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
+        } else {
+            finish();
         }
     }
+
+
+
+//	private boolean checkPermission(String permissions[]) {
+//		for (String permission : permissions) {
+//
+//			if (ContextCompat.checkSelfPermission(getApplicationContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+//				return false;
+//			}
+//
+//		}
+//		return true;
+////        if (Build.VERSION.SDK_INT >= 23) {
+////            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+////                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+////                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.CAMERA)
+////                    == PackageManager.PERMISSION_GRANTED  && checkSelfPermission(Manifest.permission.CALL_PHONE)
+////                    == PackageManager.PERMISSION_GRANTED   && checkSelfPermission(Manifest.permission.SEND_SMS)
+////                    == PackageManager.PERMISSION_GRANTED   && checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
+////                    == PackageManager.PERMISSION_GRANTED) {
+////                Log.v("TAG","Permission is granted");
+////
+////
+////                return true;
+////            } else {
+////
+////                Log.v("TAG","Permission is revoked");
+////                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.SEND_SMS
+////                        , Manifest.permission.CALL_PHONE, Manifest.permission.READ_PHONE_STATE}, REQUEST_PERMISSIONS);
+////                return false;
+////            }
+////
+////        }
+////        else { //permission is automatically granted on sdk<23 upon installation
+////            Log.v("TAG","Permission is granted");
+////            return true;
+////        }
+//	}
+//
+
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults){
+//        switch (requestCode){
+//            case REQUEST_PERMISSIONS:{
+//                // When request is cancelled, the results array are empty
+//                if(
+//                        (grantResults.length >0) &&
+//                                (grantResults[0]
+//                                        + grantResults[1]
+//                                        + grantResults[2]
+//                                        == PackageManager.PERMISSION_GRANTED
+//                                )
+//                ){
+//                    // Permissions are granted
+//
+//                    boolean hasGrantedPermissions = true;
+//			for (int i=0; i<grantResults.length; i++) {
+//				if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+//					hasGrantedPermissions = false;
+//					break;
+//				}
+//			}
+//
+//			if (!hasGrantedPermissions) {
+//				finish();
+//			}else {
+//                Thread splashThread = new Thread() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            int waited = 0;
+//                            while (waited < 2000) {
+//                                sleep(100);
+//                                waited += 100;
+//                            }
+//                        } catch (InterruptedException e) {
+//                            // do nothing
+//                        } finally {
+//                            finish();
+//                            if (utils.getMemberLoginID().equals("") || utils.getMemberId().equals("") ||
+//                                    utils.getMobileNoPrimary().equals("")) {
+//
+//                                 permissionsGranted = true;
+//                                //Intent intent = new Intent(MainActivity.this, Login.class);
+//                                Intent intent = new Intent(MainActivity.this, LoginFragmentActivity.class);
+//                                intent.putExtra("from", "1");
+//                                startActivity(intent);
+//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                                MainActivity.this.finish();
+//                            } else {
+//                                MainActivity.this.finish();
+//                                //System.out.println(utils.getMemberId());
+//                                Intent intent = new Intent(MainActivity.this, IONHome.class);
+//                                //startActivityForResult(intent, 0);
+//                                startActivity(intent);
+//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            }
+//                        }
+//                    }
+//                };
+//                splashThread.start();
+//            }
+//
+//
+//
+////                    Toast.makeText(mContext,"Permissions granted.",Toast.LENGTH_SHORT).show();
+//                }else {
+//                    // Permissions are denied
+//                    Toast.makeText(mContext,"Permissions denied.",Toast.LENGTH_SHORT).show();
+//                }
+//                return;
+//            }
+//        }
+//    }
 
 
 //	@Override
