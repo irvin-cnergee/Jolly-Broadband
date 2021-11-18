@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -338,7 +339,7 @@ public class MakePayment_PayUMoneyActivity extends BaseActivity implements Dialo
         discount = bundle.getString("discount");
         ClassName = bundle.getString("ClassName");
         additionalAmount = (AdditionalAmount) bundle.getSerializable("addtional_amount");
-
+        Log.e("UpdateFrom",":--"+UpdateFrom);
         if (bundle.getString("datafrom").equalsIgnoreCase("changepack")) {
             Changepack = true;
             tvDiscountLabel.setVisibility(View.GONE);

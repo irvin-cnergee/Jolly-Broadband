@@ -133,6 +133,7 @@ public class BeforeInsertPaymentSOAP {
             Log.e("#####################", " CALL "+WSDL_TARGET_NAMESPACE + METHOD_NAME);
             androidHttpTransport.call(WSDL_TARGET_NAMESPACE + METHOD_NAME,
                     envelope);
+            Log.e("#####################", " RESPONSE\n "+paymentdata.getPg_sms_unique_id());
 
             Utils.log("BeforeInsertPaymentSOAP",":"+androidHttpTransport.requestDump);
             Utils.log("BeforeInsertPaymentSOAP",":"+androidHttpTransport.responseDump);
@@ -149,10 +150,10 @@ public class BeforeInsertPaymentSOAP {
             } else if (envelope.bodyIn instanceof SoapFault) { // SoapFault =
                 // FAILURE
                 SoapFault soapFault = (SoapFault) envelope.bodyIn;
-                return soapFault.getMessage().toString();
-            }
-            //Log.i("#####################", " RESPONSE ");
-            //Log.i("#####################", getServerMessage());
+            return soapFault.getMessage().toString();
+        }
+        //Log.i("#####################", " RESPONSE ");
+        //Log.i("#####################", getServerMessage());
             return "ok";
         } catch (Exception e) {
             e.printStackTrace();

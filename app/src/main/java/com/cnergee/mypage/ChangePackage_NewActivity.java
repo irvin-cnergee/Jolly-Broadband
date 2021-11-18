@@ -1969,8 +1969,10 @@ public class ChangePackage_NewActivity extends Activity{
             startActivity(i);
             BaseApplication.getEventBus().post(new FinishEvent("RenewPackage"));
 
+            Log.e("REnwal", ":--" + updateFrom);
+
             if(is_payU)
-                i = new Intent(ChangePackage_NewActivity.this,MakeMyPayment_PayU.class);
+                i = new Intent(ChangePackage_NewActivity.this, MakeMyPayment_PayU.class);
             else
                 i = new Intent(ChangePackage_NewActivity.this,MakeMyPayment_PayU.class);
 

@@ -7,8 +7,8 @@ android {
         applicationId "com.cnergee.jollybroadband"
         minSdkVersion 20
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.3"
+        versionCode 4
+        versionName "1.4"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,9 +56,6 @@ configurations {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
-
-
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

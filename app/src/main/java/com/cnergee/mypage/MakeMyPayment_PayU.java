@@ -1,7 +1,6 @@
 package com.cnergee.mypage;
 
 import all.interface_.IError;
-import androidx.appcompat.app.AlertDialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -30,17 +29,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avenues.lib.utility.AvenuesParams;
-import com.cnergee.fragments.ExistingConnFragment;
 import com.cnergee.jollybroadband.R;
 import com.cnergee.mypage.SOAP.GetPayUMoneySignatureSoap;
 import com.cnergee.mypage.caller.BeforePaymentInsertCaller;
 import com.cnergee.mypage.caller.GetRedirectionDetailsCaller;
-import com.cnergee.mypage.caller.InsertBeforeWithTrackCaller;
 import com.cnergee.mypage.caller.MemberDetailCaller;
 import com.cnergee.mypage.caller.PaymentGatewayCaller;
 import com.cnergee.mypage.obj.AdditionalAmount;
-import com.cnergee.mypage.obj.AuthenticationMobile;
 import com.cnergee.mypage.obj.MemberDetailsObj;
 import com.cnergee.mypage.obj.PaymentsObj;
 import com.cnergee.mypage.obj.RedirectionDetailObj;
@@ -59,7 +54,6 @@ import com.cnergee.widgets.ProgressHUD;
 //import com.payumoney.sdkui.ui.utils.PayUmoneyFlowManager;
 //import com.payumoney.sdkui.ui.utils.ResultModel;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.SocketException;
@@ -71,9 +65,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import static com.cnergee.mypage.BaseActivity.iError;
-import static com.cnergee.mypage.MakeMyPayment_Atom.MapRedirectionDetails;
 
 public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.OnCancelListener {
 
@@ -107,10 +98,10 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
     AdditionalAmount additionalAmount;
     MemberDetailsObj memberDetails;
     Bundle bundle;
-    private InsertBeforeWithTrackId insertBeforeWithTrackId = null;
+//    private InsertBeforeWithTrackId insertBeforeWithTrackId = null;
     String str_Mobile_No, str_Email, str_FirstName;
     private PaymentGateWayDetails getpaymentgatewaysdetails = null;
-    private InsertBeforePayemnt InsertBeforePayemnt = null;
+//    private InsertBeforePayemnt InsertBeforePayemnt = null;
     private GetMemberDetailWebService getMemberDetailWebService = null;
 
     public static Context context;
@@ -356,7 +347,9 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
             ClassName = bundle.getString("ClassName");
             additionalAmount = (AdditionalAmount) bundle.getSerializable("addtional_amount");
             PackageId = bundle.getString("packageid");
-            if (bundle.getString("datafrom").equalsIgnoreCase("changepack")) {
+        Log.e("REnwal", ":--" + UpdateFrom);
+
+        if (bundle.getString("datafrom").equalsIgnoreCase("changepack")) {
                 Changepack = true;
                 tvDiscountLabel.setVisibility(View.GONE);
             } else {
@@ -632,107 +625,108 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
 
 
 
-    private class InsertBeforeWithTrackId extends AsyncTask<String,Void,Void> implements DialogInterface.OnCancelListener
-    {
-
-        ProgressHUD mProgressHUD;
-        PaymentsObj paymentsObj = new PaymentsObj();
-
-        @Override
-        protected void onPreExecute() {
-            if(is_activity_running){
-                mProgressHUD = ProgressHUD
-                        .show(MakeMyPayment_PayU.this,
-                                getString(R.string.app_please_wait_label), true,
-                                true, this);
-            }
-        }
-
-        @Override
-        public void onCancel(DialogInterface dialog) {
-            if(is_activity_running)
-                mProgressHUD.dismiss();
-            insertBeforeWithTrackId = null;
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            try {
-                // setCurrDateTime();
-                // Log.i(" >>>>> ",getCurrDateTime());
-
-                BeforePaymentInsertCaller caller = new BeforePaymentInsertCaller(
-                        getApplicationContext().getResources().getString(
-                                R.string.WSDL_TARGET_NAMESPACE),
-                        getApplicationContext().getResources().getString(R.string.SOAP_URL), getApplicationContext()
-                        .getResources().getString(R.string.METHOD_BEFORE_MEMBER_PAYMENTS_NEW), true);
-
-                paymentsObj.setMemberId(Long.valueOf(utils.getMemberId()));
-                paymentsObj.setTrackId(TrackId);
-                paymentsObj.setAmount(txtnewamount.getText().toString().trim());
-                paymentsObj.setPackageName(txtnewpackagename.getText().toString());
-                paymentsObj.setServiceTax(ServiceTax);
-                paymentsObj.setDiscount_Amount(additionalAmount.getDiscountAmount());
-                if (Utils.pg_sms_request) {
-                    if (Utils.pg_sms_uniqueid.length() > 0) {
-                        paymentsObj.setPg_sms_unique_id(Utils.pg_sms_uniqueid);
-                    } else {
-                        paymentsObj.setPg_sms_unique_id(null);
-                    }
-                } else {
-                    paymentsObj.setPg_sms_unique_id(null);
-                }
-                caller.setPaymentdata(paymentsObj);
-
-                caller.join();
-                caller.start();
-                rslt = "START";
-
-                while (rslt == "START") {
-                    try {
-                        Thread.sleep(10);
-                    } catch (Exception ex) {
-                    }
-                }
-
-            } catch (Exception e) {
-                /* AlertsBoxFactory.showAlert(rslt,context ); */
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            InsertBeforePayemnt = null;
-
-            if(is_activity_running)
-                mProgressHUD.dismiss();
-            insertBeforeWithTrackId = null;
-
-            if (rslt.trim().equalsIgnoreCase("ok")) {
-
-//                Log.e("RESPONSE TRACKID",":"+ MakeMyPayments_CCAvenue.responseMsg);
-                TrackId = MakeMyPayment_PayU.responseMsg;
-
-                if(TrackId!=null && TrackId.length()>0 && !TrackId.equalsIgnoreCase("null") ) {
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                        new Get_EBS_Signature().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (String)null);
-                    }
-                    else{
-                        new Get_EBS_Signature().execute();
-                    }
-                }else{
-                    AlertsBoxFactory.showAlert("TrackId not generated. Please try Again !!!", context);
-                }
-
-            } else {
-                if(is_activity_running)
-                    AlertsBoxFactory.showAlert(rslt, context);
-                return;
-            }
-        }
-    }
+//    private class InsertBeforeWithTrackId extends AsyncTask<String,Void,Void> implements DialogInterface.OnCancelListener
+//    {
+//
+//        ProgressHUD mProgressHUD;
+//        PaymentsObj paymentsObj = new PaymentsObj();
+//
+//        @Override
+//        protected void onPreExecute() {
+//            if(is_activity_running){
+//                mProgressHUD = ProgressHUD
+//                        .show(MakeMyPayment_PayU.this,
+//                                getString(R.string.app_please_wait_label), true,
+//                                true, this);
+//            }
+//        }
+//
+//        @Override
+//        public void onCancel(DialogInterface dialog) {
+//            if(is_activity_running)
+//                mProgressHUD.dismiss();
+//            insertBeforeWithTrackId = null;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(String... strings) {
+//            try {
+//                // setCurrDateTime();
+//                // Log.i(" >>>>> ",getCurrDateTime());
+//
+//                BeforePaymentInsertCaller caller = new BeforePaymentInsertCaller(
+//                        getApplicationContext().getResources().getString(
+//                                R.string.WSDL_TARGET_NAMESPACE),
+//                        getApplicationContext().getResources().getString(R.string.SOAP_URL), getApplicationContext()
+//                        .getResources().getString(R.string.METHOD_BEFORE_MEMBER_PAYMENTS_NEW), true);
+//
+//                paymentsObj.setMemberId(Long.valueOf(utils.getMemberId()));
+//                paymentsObj.setTrackId(TrackId);
+//                paymentsObj.setAmount(txtnewamount.getText().toString().trim());
+//                paymentsObj.setPackageName(txtnewpackagename.getText().toString());
+//                paymentsObj.setServiceTax(ServiceTax);
+//                paymentsObj.setDiscount_Amount(additionalAmount.getDiscountAmount());
+//                paymentsObj.setRenewaltype(UpdateFrom);
+//                if (Utils.pg_sms_request) {
+//                    if (Utils.pg_sms_uniqueid.length() > 0) {
+//                        paymentsObj.setPg_sms_unique_id(Utils.pg_sms_uniqueid);
+//                    } else {
+//                        paymentsObj.setPg_sms_unique_id(null);
+//                    }
+//                } else {
+//                    paymentsObj.setPg_sms_unique_id(null);
+//                }
+//                caller.setPaymentdata(paymentsObj);
+//
+//                caller.join();
+//                caller.start();
+//                rslt = "START";
+//
+//                while (rslt == "START") {
+//                    try {
+//                        Thread.sleep(10);
+//                    } catch (Exception ex) {
+//                    }
+//                }
+//
+//            } catch (Exception e) {
+//                /* AlertsBoxFactory.showAlert(rslt,context ); */
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+////            InsertBeforePayemnt = null;
+//
+//            if(is_activity_running)
+//                mProgressHUD.dismiss();
+//            insertBeforeWithTrackId = null;
+//
+//            if (rslt.trim().equalsIgnoreCase("ok")) {
+//
+////                Log.e("RESPONSE TRACKID",":"+ MakeMyPayments_CCAvenue.responseMsg);
+//                TrackId = MakeMyPayment_PayU.responseMsg;
+//
+//                if(TrackId!=null && TrackId.length()>0 && !TrackId.equalsIgnoreCase("null") ) {
+//
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//                        new Get_PayU_Signature().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (String)null);
+//                    }
+//                    else{
+//                        new Get_PayU_Signature().execute();
+//                    }
+//                }else{
+//                    AlertsBoxFactory.showAlert("TrackId not generated. Please try Again !!!", context);
+//                }
+//
+//            } else {
+//                if(is_activity_running)
+//                    AlertsBoxFactory.showAlert(rslt, context);
+//                return;
+//            }
+//        }
+//    }
 
 
 
@@ -1220,7 +1214,7 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
         protected void onCancelled() {
             if (is_activity_running)
                 mProgressHUD.dismiss();
-            InsertBeforePayemnt = null;
+//            InsertBeforePayemnt = null;
             // submit.setClickable(true);
         }
 
@@ -1230,16 +1224,16 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
             Utils.log("3 Progress", "end");
             Utils.log("3 Progress", "rslt:" + rslt);
             // submit.setClickable(true);
-            InsertBeforePayemnt = null;
+//            InsertBeforePayemnt = null;
 
             if (rslt.trim().equalsIgnoreCase("ok")) {
 
                 if (memberid > 0) {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                        new Get_EBS_Signature().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (String) null);
+                        new Get_PayU_Signature().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (String) null);
                     } else {
-                        new Get_EBS_Signature().execute();
+                        new Get_PayU_Signature().execute();
                     }
                 }else {
 
@@ -1273,6 +1267,7 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
                 paymentsObj.setPackageName(txtnewpackagename.getText().toString());
                 paymentsObj.setServiceTax(ServiceTax);
                 paymentsObj.setDiscount_Amount(additionalAmount.getDiscountAmount());
+                paymentsObj.setRenewaltype(UpdateFrom);
                 if (Utils.pg_sms_request) {
                     if (Utils.pg_sms_uniqueid.length() > 0) {
                         paymentsObj.setPg_sms_unique_id(Utils.pg_sms_uniqueid);
@@ -1309,7 +1304,7 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
         }
     }
 
-    public class Get_EBS_Signature extends AsyncTask<String, Void, Void> implements DialogInterface.OnCancelListener {
+    public class Get_PayU_Signature extends AsyncTask<String, Void, Void> implements DialogInterface.OnCancelListener {
 
         ProgressHUD mProgressHUD;
         String get_SignResult="",get_Sign_Response="";
@@ -1421,8 +1416,7 @@ public class MakeMyPayment_PayU extends BaseActivity implements DialogInterface.
                                     i.putExtra("web_number", web_number);
                                     i.putExtra("web_emailId", web_emailId);
                                     i.putExtra("web_First_name", web_First_name);
-                                i.putExtra("PackageAmount", txtnewamount.getText().toString());
-
+                                    i.putExtra("PackageAmount", txtnewamount.getText().toString());
                                     i.putExtra("web_track_id",web_track_id);
                                     i.putExtra("TrackId", TrackId);
                                     i.putExtra("additional_amount", additionalAmount);

@@ -6,9 +6,11 @@
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/activity_chat.xml" value="0.134375" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/activity_help.xml" value="0.1203125" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/activity_main.xml" value="0.2609375" />
+        <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/activity_make_my_payment__pay_u.xml" value="0.24909420289855072" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/grid_days.xml" value="0.12689969604863222" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/login_fragment_activity.xml" value="0.2609375" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/makemypayments.xml" value="0.2609375" />
+        <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/newchangepackage.xml" value="0.134375" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/test_myapp_home.xml" value="0.12689969604863222" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/layout/transresponse.xml" value="0.2609375" />
         <entry key="..\:/JYOTI WORKSPACE/CMAYA/ANDROID APPLICATION/LIVE CLIENT/Jolly Broadband/app/src/main/res/menu/activity_main.xml" value="0.2609375" />
@@ -19,7 +21,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
